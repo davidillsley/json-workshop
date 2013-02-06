@@ -52,9 +52,12 @@ public class Rates {
 	}
 
 	/**
+	 * Find currencies which have an exchange rate of 1 on a given date
 	 * 
 	 * @param date
 	 * @return
+	 *  * @throws RateNotPresentException
+	 *             if the rates are not available for the given date
 	 */
 	public static Collection<String> findBaseEquivalentCurrencies(String date) {
 		JsonObject obj = createJsonReader(date).readObject();
