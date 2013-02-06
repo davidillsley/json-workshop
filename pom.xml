@@ -3,12 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.i5y.json.workshop</groupId>
-	<artifactId>take1</artifactId>
+	<artifactId>currency</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>take1</name>
-	<url>http://maven.apache.org</url>
+	<name>currency</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,11 +21,11 @@
 			<scope>test</scope>
 		</dependency>
 
-<dependency>
-  <groupId>org.glassfish</groupId>
-  <artifactId>javax.json</artifactId>
-  <version>1.0-b03</version>
-</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0-b03</version>
+		</dependency>
 	</dependencies>
 
 	<build>
