@@ -3,18 +3,10 @@ package org.i5y.json.workshop.currency;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonNumber;
 import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
-import javax.json.JsonValue;
 
 public class Rates {
 
@@ -38,17 +30,8 @@ public class Rates {
 	}
 
 	private static double getRate(JsonObject jsonDoc, String currency) {
-		JsonObject rates = jsonDoc.getValue("rates", JsonObject.class);
-		if (rates != null) {
-			JsonValue jn = rates.get(currency);
-			if (jn instanceof JsonNumber) {
-				return ((JsonNumber) jn).getDoubleValue();
-			} else {
-				throw new RateNotPresentException();
-			}
-		} else {
-			throw new RateNotPresentException();
-		}
+		// TODO
+		return 0;
 	}
 
 	/**
@@ -60,24 +43,7 @@ public class Rates {
 	 *             if the rates are not available for the given date
 	 */
 	public static Collection<String> findBaseEquivalentCurrencies(String date) {
-		JsonObject obj = createJsonReader(date).readObject();
-		JsonObject rates = obj.getValue("rates", JsonObject.class);
-		Collection<String> result = new HashSet<>();
-		String baseCurrency = obj.getStringValue("base", "USD");
-		if (rates != null) {
-			for (Entry<String, JsonValue> entry : rates.entrySet()) {
-				if (entry.getValue() instanceof JsonNumber) {
-					if (((JsonNumber) entry.getValue()).getDoubleValue() == 1.0) {
-						if (!entry.getKey().equals(baseCurrency)) {
-							result.add(entry.getKey());
-						}
-					}
-				}
-			}
-		} else {
-			throw new RateNotPresentException();
-		}
-		return result;
+		return null;
 	}
 
 	/**
@@ -104,22 +70,8 @@ public class Rates {
 			dates.add(segments[0] + "-" + segments[1] + "-" + dayStr);
 		}
 
-		JsonArrayBuilder ratesArrayBuilder = Json.createArrayBuilder();
-
-		for (String date : dates) {
-			JsonObject obj = createJsonReader(date).readObject();
-			JsonNumber jn = obj.getValue("timestamp", JsonNumber.class);
-			long time = jn.getLongValue();
-			double rate = getRate(obj, currency);
-			ratesArrayBuilder.add(Json.createObjectBuilder()
-					.add("timestamp", new Date(time * 1000l).toString())
-					.add("rate", rate));
-		}
-
-		JsonObjectBuilder objectBuilder = Json.createObjectBuilder()
-				.add("currency", currency).add("rates", ratesArrayBuilder);
-
-		return objectBuilder.build();
+		// TODO
+		return null;
 	}
 
 	/**
@@ -131,6 +83,7 @@ public class Rates {
 	 */
 	private static JsonReader createJsonReader(String date) {
 		InputStream is = Rates.class.getResourceAsStream("/" + date + ".json");
-		return Json.createReader(is);
+		// TODO
+		return null;
 	}
 }
